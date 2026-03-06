@@ -16,32 +16,68 @@
 
         body {
             font-family: 'Arial Black', Gadget, sans-serif;
-            background-color: var(--bg);
-            background-image: linear-gradient(180deg, var(--blue) 0%, #000 100%);
-            color: white;
             margin: 0;
+            padding: 0;
+            min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
-            padding: 20px;
+            /* Confetti container allows confetti to fall behind content */
+            position: relative;
+            overflow-x: hidden;
+            background-color: var(--bg);
+            background-image: linear-gradient(180deg, var(--blue) 0%, #000 100%);
         }
 
+        /* Confetti Container */
+        #confetti-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none; /* Allows clicks to pass through confetti */
+            z-index: 1; /* Behind the main content */
+        }
+
+        /* Confetti Particle Styling */
+        .confetti-particle {
+            position: absolute;
+            border-radius: 50%; /* Rounded for softer confetti look */
+            opacity: 0.8;
+            animation: confettiFall linear infinite;
+        }
+
+        @keyframes confettiFall {
+            0% { transform: translateY(-100vh) rotate(0deg); }
+            100% { transform: translateY(100vh) rotate(360deg); }
+        }
+
+        /* Color classes for confetti */
+        .confetti-red { background-color: var(--red); }
+        .confetti-blue { background-color: var(--blue); border: 1px solid white; }
+        .confetti-gold { background-color: var(--gold); }
+
+        /* Main Content Container */
         .container {
             max-width: 600px;
-            width: 100%;
+            width: 90%;
             background: var(--card-bg);
             padding: 40px;
             border-radius: 15px;
-            box-shadow: 0 15px 50px rgba(0,0,0,0.8);
+            box-shadow: 0 15px 50px rgba(0,0,0,0.9);
             border: 4px solid var(--gold);
             text-align: center;
             color: var(--text-dark);
+            margin: 20px 0;
+            /* Places content above confetti */
+            position: relative;
+            z-index: 10;
         }
 
         h1 {
             color: var(--blue);
-            font-size: 2.5rem;
+            font-size: 2rem;
             margin-bottom: 0;
             text-transform: uppercase;
         }
@@ -52,7 +88,7 @@
             font-size: 2rem;
             padding: 10px;
             margin: 20px -40px;
-            transform: rotate(-2deg);
+            transform: rotate(-1.5deg);
             box-shadow: 0 4px 10px rgba(0,0,0,0.3);
         }
 
@@ -105,24 +141,48 @@
             display: block;
         }
 
+        .copy-box {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: white;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+
+        .copy-btn {
+            background: var(--blue);
+            color: white;
+            border: none;
+            padding: 5px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            font-family: sans-serif;
+            font-weight: bold;
+        }
+
         .btn {
             display: inline-block;
             background: var(--red);
             color: white;
-            padding: 20px 40px;
+            padding: 18px 30px;
             border-radius: 50px;
             text-decoration: none;
             font-weight: bold;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             margin: 15px 0;
             transition: 0.3s;
             border: 3px solid transparent;
+            text-align: center;
         }
 
         .btn:hover {
             background: var(--blue);
             border-color: var(--gold);
-            transform: scale(1.05);
+            transform: scale(1.03);
         }
 
         .footer-tag {
@@ -133,57 +193,91 @@
             margin-top: 30px;
             text-transform: uppercase;
         }
+
+        /* Mobile specific font size adjustment */
+        @media (max-width: 500px) {
+            h1 { font-size: 1.6rem; }
+            .entry-banner { font-size: 1.6rem; }
+        }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <h1>MONK MADNESS 2026 POOL</h1>
-    <div class="entry-banner">$10 ENTRY FEE</div>
+    <div id="confetti-container"></div>
 
-    <div id="timer">
-        <div class="timer-segment"><span class="timer-value" id="days">00</span><span class="timer-label">Days</span></div>
-        <div class="timer-segment"><span class="timer-value" id="hours">00</span><span class="timer-label">Hours</span></div>
-        <div class="timer-segment"><span class="timer-value" id="minutes">00</span><span class="timer-label">Mins</span></div>
-        <div class="timer-segment"><span class="timer-value" id="seconds">00</span><span class="timer-label">Secs</span></div>
+    <div class="container">
+        <h1>MONK MADNESS 2026 POOL</h1>
+        <div class="entry-banner">$10 ENTRY FEE</div>
+
+        <div id="timer">
+            <div class="timer-segment"><span class="timer-value" id="days">00</span><span class="timer-label">Days</span></div>
+            <div class="timer-segment"><span class="timer-value" id="hours">00</span><span class="timer-label">Hours</span></div>
+            <div class="timer-segment"><span class="timer-value" id="minutes">00</span><span class="timer-label">Mins</span></div>
+            <div class="timer-segment"><span class="timer-value" id="seconds">00</span><span class="timer-label">Secs</span></div>
+        </div>
+
+        <div class="warning">⚠️ PAY BEFORE JOINING</div>
+
+        <table>
+            <thead><tr><th colspan="2">TOP 5 PAYOUTS</th></tr></thead>
+            <tbody>
+                <tr><td>🥇 1st Place</td><td class="payout-val">50%</td></tr>
+                <tr><td>🥈 2nd Place</td><td class="payout-val">20%</td></tr>
+                <tr><td>🥉 3rd Place</td><td class="payout-val">15%</td></tr>
+                <tr><td>🏅 4th Place</td><td class="payout-val">10%</td></tr>
+                <tr><td>🏅 5th Place</td><td class="payout-val">5%</td></tr>
+            </tbody>
+        </table>
+
+        <div class="step-card">
+            <span class="step-title">STEP 1: E-TRANSFER $10</span>
+            <div class="copy-box">
+                <span id="email">ajmonk74@gmail.com</span>
+                <button class="copy-btn" onclick="copyText('email', this)">COPY</button>
+            </div>
+            <p style="font-size: 0.85rem; border: 1px dashed var(--blue); padding: 10px; background: white; margin-top: 10px;">
+                <strong>IMPORTANT:</strong> In the e-transfer memo, include your <strong>CBS Username</strong> if it is different from your e-transfer name.
+            </p>
+        </div>
+
+        <div class="step-card">
+            <span class="step-title">STEP 2: JOIN ON CBS</span>
+            <center>
+                <a href="https://picks.cbssports.com/college-basketball/ncaa-tournament/bracket/pools/kbxw63b2ge3demrtg4ytm===/join?pool-join-key=IEHC8juYsGYq4GGz4FkTgvFEi0zZdAfe&ttag=BPM26_and_cbsinvm" target="_blank" class="btn">JOIN THE POOL</a>
+            </center>
+            <p style="font-size: 0.85rem; margin-top: 10px; line-height: 1.4;">
+                <strong>If you have an account:</strong> Login then join.<br>
+                <strong>If you don't:</strong> Download the <b>CBS Sports App</b>, make an account, login, then join from the link above.
+            </p>
+        </div>
+
+        <div class="step-card">
+            <span class="step-title">STEP 3: JOIN GROUPCHAT</span>
+            <p style="font-size: 0.9rem; margin-bottom: 5px;">Add on Snapchat and ask to be added:</p>
+            <div class="copy-box">
+                <span id="snap">Davissavage1</span>
+                <button class="copy-btn" onclick="copyText('snap', this)">COPY</button>
+            </div>
+        </div>
+
+        <div class="footer-tag">LET THE MADNESS BEGIN!!</div>
     </div>
-
-    <div class="warning">⚠️ PAY BEFORE JOINING</div>
-
-    <table>
-        <thead><tr><th colspan="2">TOP 5 PAYOUTS</th></tr></thead>
-        <tbody>
-            <tr><td>1st Place</td><td class="payout-val">50%</td></tr>
-            <tr><td>2nd Place</td><td class="payout-val">20%</td></tr>
-            <tr><td>3rd Place</td><td class="payout-val">15%</td></tr>
-            <tr><td>4th Place</td><td class="payout-val">10%</td></tr>
-            <tr><td>5th Place</td><td class="payout-val">5%</td></tr>
-        </tbody>
-    </table>
-
-    <div class="step-card">
-        <span class="step-title">STEP 1: E-TRANSFER $10</span>
-        <p>Send to: <strong>ajmonk74@gmail.com</strong></p>
-        <p style="font-size: 0.9rem; border: 1px dashed var(--blue); padding: 10px; background: white;">
-            <strong>Note:</strong> In the e-transfer memo, please include your <strong>CBS Username</strong> if it is different from your e-transfer name so we can verify you.
-        </p>
-    </div>
-
-    <div class="step-card">
-        <span class="step-title">STEP 2: JOIN ON CBS</span>
-        <center>
-            <a href="https://picks.cbssports.com/college-basketball/ncaa-tournament/bracket/pools/kbxw63b2ge3demrtg4ytm===/join?pool-join-key=IEHC8juYsGYq4GGz4FkTgvFEi0zZdAfe&ttag=BPM26_and_cbsinvm" target="_blank" class="btn">JOIN THE POOL</a>
-        </center>
-        <p style="font-size: 0.8rem; margin-top: 10px;">
-            <em>If you have an account:</em> Log in before clicking join.<br>
-            <em>If you don't:</em> Click join and create an account first.
-        </p>
-    </div>
-
-    <div class="footer-tag">LET THE MADNESS BEGIN!!</div>
-</div>
 
 <script>
+    // 1. Copy Function
+    function copyText(id, btn) {
+        const text = document.getElementById(id).innerText;
+        navigator.clipboard.writeText(text);
+        const originalText = btn.innerText;
+        btn.innerText = "COPIED!";
+        btn.style.background = "#28a745";
+        setTimeout(() => {
+            btn.innerText = originalText;
+            btn.style.background = "var(--blue)";
+        }, 1500);
+    }
+
+    // 2. Countdown Logic
     const countDownDate = new Date("Mar 15, 2026 18:00:00").getTime();
     const x = setInterval(function() {
         const now = new Date().getTime();
@@ -194,6 +288,40 @@
         document.getElementById("seconds").innerHTML = Math.floor((distance % (1000 * 60)) / 1000);
         if (distance < 0) { clearInterval(x); document.getElementById("timer").innerHTML = "BRACKETS LOCKED"; }
     }, 1000);
+
+    // 3. Tricolour Confetti Logic
+    function createConfetti() {
+        const container = document.getElementById('confetti-container');
+        const colors = ['confetti-red', 'confetti-blue', 'confetti-gold'];
+        const numParticles = 100; // Total particles to maintain on screen
+
+        for (let i = 0; i < numParticles; i++) {
+            const confetti = document.createElement('div');
+            
+            // Apply a random tricolour class
+            const randomColorClass = colors[Math.floor(Math.random() * colors.length)];
+            confetti.classList.add('confetti-particle', randomColorClass);
+
+            // Randomize starting position (horizontal % of screen width)
+            confetti.style.left = Math.random() * 100 + '%';
+            
+            // Randomize size (between 5px and 12px)
+            const size = Math.random() * 7 + 5 + 'px';
+            confetti.style.width = size;
+            confetti.style.height = size;
+            
+            // Randomize vertical start delay (to create constant flow)
+            confetti.style.animationDelay = Math.random() * -20 + 's';
+            
+            // Randomize fall speed (between 3s and 8s)
+            confetti.style.animationDuration = Math.random() * 5 + 3 + 's';
+
+            container.appendChild(confetti);
+        }
+    }
+
+    // Initialize confetti on load
+    window.onload = createConfetti;
 </script>
 
 </body>
