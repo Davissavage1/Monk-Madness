@@ -3,24 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Monk Madness 2026 | Queen's University</title>
+    <title>Monk Madness 2026</title>
     <style>
         :root {
-            /* Queen's Official Tricolour Palette */
-            --queens-blue: #002452;
-            --queens-red: #b90e31;
-            --queens-gold: #febd11;
+            --blue: #002452;
+            --red: #b90e31;
+            --gold: #febd11;
             --bg: #001a3a;
             --card-bg: #ffffff;
             --text-dark: #002452;
-            --text-light: #ffffff;
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Arial Black', Gadget, sans-serif;
             background-color: var(--bg);
-            background-image: linear-gradient(135deg, var(--queens-blue) 0%, #000 100%);
-            color: var(--text-light);
+            background-image: linear-gradient(180deg, var(--blue) 0%, #000 100%);
+            color: white;
             margin: 0;
             display: flex;
             justify-content: center;
@@ -30,246 +28,171 @@
         }
 
         .container {
-            max-width: 650px;
+            max-width: 600px;
             width: 100%;
             background: var(--card-bg);
             padding: 40px;
-            border-radius: 12px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.6);
-            border-top: 8px solid var(--queens-red);
+            border-radius: 15px;
+            box-shadow: 0 15px 50px rgba(0,0,0,0.8);
+            border: 4px solid var(--gold);
             text-align: center;
             color: var(--text-dark);
         }
 
         h1 {
-            color: var(--queens-blue);
-            font-size: 2.8rem;
-            margin-bottom: 5px;
-            font-weight: 900;
+            color: var(--blue);
+            font-size: 2.5rem;
+            margin-bottom: 0;
             text-transform: uppercase;
         }
 
-        .subtitle {
-            color: var(--queens-red);
-            font-weight: bold;
-            font-size: 1.1rem;
-            margin-bottom: 20px;
-            letter-spacing: 1px;
+        .entry-banner {
+            background: var(--red);
+            color: white;
+            font-size: 2rem;
+            padding: 10px;
+            margin: 20px -40px;
+            transform: rotate(-2deg);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
         }
 
-        /* Countdown Timer Styling */
         #timer {
             display: flex;
             justify-content: center;
             gap: 15px;
-            margin-bottom: 30px;
-            background: var(--queens-blue);
+            margin: 20px 0;
+            background: var(--blue);
             padding: 15px;
-            border-radius: 10px;
-            color: white;
+            border-radius: 8px;
         }
 
-        .timer-segment {
-            display: flex;
-            flex-direction: column;
-        }
+        .timer-segment { display: flex; flex-direction: column; }
+        .timer-value { font-size: 1.5rem; font-weight: bold; color: var(--gold); }
+        .timer-label { font-size: 0.7rem; color: white; text-transform: uppercase; }
 
-        .timer-value {
-            font-size: 1.8rem;
-            font-weight: bold;
-            color: var(--queens-gold);
-        }
-
-        .timer-label {
-            font-size: 0.7rem;
+        .warning {
+            color: var(--red);
+            font-weight: 900;
+            margin-bottom: 20px;
             text-transform: uppercase;
-            opacity: 0.8;
-        }
-
-        .step-card {
-            background: #f8f9fa;
-            padding: 25px;
-            border-radius: 10px;
-            margin-bottom: 25px;
-            text-align: left;
-            border-left: 6px solid var(--queens-gold);
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-        }
-
-        .step-title {
-            font-size: 1.3rem;
-            font-weight: bold;
-            color: var(--queens-blue);
-            margin-bottom: 12px;
-            display: block;
-        }
-
-        .important-note {
-            background: #fff4e5;
-            border: 1px solid var(--queens-gold);
-            padding: 12px;
-            border-radius: 6px;
-            font-size: 0.95rem;
-            margin-top: 15px;
-            color: #856404;
-        }
-
-        .btn {
-            display: inline-block;
-            background: var(--queens-red);
-            color: white;
-            padding: 18px 35px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: bold;
             font-size: 1.1rem;
-            margin-top: 15px;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(185, 14, 49, 0.3);
-        }
-
-        .btn:hover {
-            background: var(--queens-blue);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0, 36, 82, 0.4);
         }
 
         table {
             width: 100%;
-            margin: 25px 0;
+            margin-bottom: 30px;
             border-collapse: collapse;
-            overflow: hidden;
-            border-radius: 8px;
-            border: 1px solid #ddd;
         }
 
-        th {
-            background: var(--queens-blue);
-            color: white;
-            padding: 12px;
-        }
+        th { background: var(--blue); color: white; padding: 10px; }
+        td { padding: 8px; border-bottom: 1px solid #ddd; font-weight: bold; }
+        .payout-val { color: var(--red); }
 
-        td {
-            padding: 10px;
-            border-bottom: 1px solid #eee;
-            font-weight: 500;
-        }
-
-        .highlight-payout {
-            color: var(--queens-red);
-            font-weight: 800;
-        }
-
-        .warning-text {
-            background: var(--queens-red);
-            color: white;
-            padding: 10px;
-            font-weight: bold;
-            border-radius: 4px;
+        .step-card {
+            background: #f1f1f1;
+            padding: 20px;
+            border-radius: 10px;
             margin-bottom: 20px;
-            display: inline-block;
+            text-align: left;
+            border-left: 8px solid var(--blue);
         }
 
-        .instruction-text {
-            font-size: 0.9rem;
-            color: #555;
-            margin-top: 15px;
-            line-height: 1.5;
-            padding: 10px;
-            background: #fff;
-            border-radius: 4px;
+        .step-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--blue);
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--red);
+            color: white;
+            padding: 20px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin: 15px 0;
+            transition: 0.3s;
+            border: 3px solid transparent;
+        }
+
+        .btn:hover {
+            background: var(--blue);
+            border-color: var(--gold);
+            transform: scale(1.05);
+        }
+
+        .footer-tag {
+            font-style: italic;
+            font-weight: 900;
+            font-size: 1.5rem;
+            color: var(--blue);
+            margin-top: 30px;
+            text-transform: uppercase;
         }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h1>MONK MADNESS</h1>
-    <p class="subtitle">QUEEN'S UNIVERSITY POOL 2026</p>
+    <h1>MONK MADNESS 2026 POOL</h1>
+    <div class="entry-banner">$10 ENTRY FEE</div>
 
     <div id="timer">
-        <div class="timer-segment">
-            <span class="timer-value" id="days">00</span>
-            <span class="timer-label">Days</span>
-        </div>
-        <div class="timer-segment">
-            <span class="timer-value" id="hours">00</span>
-            <span class="timer-label">Hours</span>
-        </div>
-        <div class="timer-segment">
-            <span class="timer-value" id="minutes">00</span>
-            <span class="timer-label">Mins</span>
-        </div>
-        <div class="timer-segment">
-            <span class="timer-value" id="seconds">00</span>
-            <span class="timer-label">Secs</span>
-        </div>
+        <div class="timer-segment"><span class="timer-value" id="days">00</span><span class="timer-label">Days</span></div>
+        <div class="timer-segment"><span class="timer-value" id="hours">00</span><span class="timer-label">Hours</span></div>
+        <div class="timer-segment"><span class="timer-value" id="minutes">00</span><span class="timer-label">Mins</span></div>
+        <div class="timer-segment"><span class="timer-value" id="seconds">00</span><span class="timer-label">Secs</span></div>
     </div>
 
-    <div class="warning-text">⚠️ PAY BEFORE JOINING THE POOL</div>
+    <div class="warning">⚠️ PAY BEFORE JOINING</div>
 
     <table>
-        <thead>
-            <tr>
-                <th colspan="2">🏆 PAYOUT PERCENTAGES</th>
-            </tr>
-        </thead>
+        <thead><tr><th colspan="2">TOP 5 PAYOUTS</th></tr></thead>
         <tbody>
-            <tr><td>🥇 1st Place</td><td class="highlight-payout">50%</td></tr>
-            <tr><td>🥈 2nd Place</td><td class="highlight-payout">20%</td></tr>
-            <tr><td>🥉 3rd Place</td><td class="highlight-payout">15%</td></tr>
-            <tr><td>🏅 4th Place</td><td class="highlight-payout">10%</td></tr>
-            <tr><td>🏅 5th Place</td><td class="highlight-payout">5%</td></tr>
+            <tr><td>1st Place</td><td class="payout-val">50%</td></tr>
+            <tr><td>2nd Place</td><td class="payout-val">20%</td></tr>
+            <tr><td>3rd Place</td><td class="payout-val">15%</td></tr>
+            <tr><td>4th Place</td><td class="payout-val">10%</td></tr>
+            <tr><td>5th Place</td><td class="payout-val">5%</td></tr>
         </tbody>
     </table>
 
     <div class="step-card">
-        <span class="step-title">STEP 1: E-TRANSFER ENTRY FEE</span>
-        <p>Send transfer to: <strong>ajmonk74@gmail.com</strong></p>
-        <div class="important-note">
-            <strong>NOTE REQUIRED:</strong> You must put your <strong>CBS Username</strong> in the transfer memo. This allows us to verify your payment so we don't kick you from the pool.
-        </div>
+        <span class="step-title">STEP 1: E-TRANSFER $10</span>
+        <p>Send to: <strong>ajmonk74@gmail.com</strong></p>
+        <p style="font-size: 0.9rem; border: 1px dashed var(--blue); padding: 10px; background: white;">
+            <strong>Note:</strong> In the e-transfer memo, please include your <strong>CBS Username</strong> if it is different from your e-transfer name so we can verify you.
+        </p>
     </div>
 
     <div class="step-card">
-        <span class="step-title">STEP 2: JOIN THE BRACKET</span>
+        <span class="step-title">STEP 2: JOIN ON CBS</span>
         <center>
-            <a href="https://picks.cbssports.com/college-basketball/ncaa-tournament/bracket/pools/kbxw63b2ge3demrtg4ytm===/join?pool-join-key=IEHC8juYsGYq4GGz4FkTgvFEi0zZdAfe&ttag=BPM26_and_cbsinvm" class="btn">JOIN THE POOL</a>
+            <a href="https://picks.cbssports.com/college-basketball/ncaa-tournament/bracket/pools/kbxw63b2ge3demrtg4ytm===/join?pool-join-key=IEHC8juYsGYq4GGz4FkTgvFEi0zZdAfe&ttag=BPM26_and_cbsinvm" target="_blank" class="btn">JOIN THE POOL</a>
         </center>
-        
-        <div class="instruction-text">
-            <strong>Instructions:</strong><br>
-            • If you have a CBS account, log in before clicking.<br>
-            • If you don't have an account, click join and follow the "Sign Up" prompts.<br>
-            • <strong>CRITICAL:</strong> Change your display name to your <strong>Real Name</strong> inside the pool settings.
-        </div>
+        <p style="font-size: 0.8rem; margin-top: 10px;">
+            <em>If you have an account:</em> Log in before clicking join.<br>
+            <em>If you don't:</em> Click join and create an account first.
+        </p>
     </div>
 
-    <p style="font-size: 0.8rem; opacity: 0.6;">Cha Gheill! Good luck to everyone.</p>
+    <div class="footer-tag">LET THE MADNESS BEGIN!!</div>
 </div>
 
 <script>
-    // Set the date we're counting down to (Selection Sunday 2026)
     const countDownDate = new Date("Mar 15, 2026 18:00:00").getTime();
-
     const x = setInterval(function() {
         const now = new Date().getTime();
         const distance = countDownDate - now;
-
-        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-        document.getElementById("days").innerHTML = days;
-        document.getElementById("hours").innerHTML = hours;
-        document.getElementById("minutes").innerHTML = minutes;
-        document.getElementById("seconds").innerHTML = seconds;
-
-        if (distance < 0) {
-            clearInterval(x);
-            document.getElementById("timer").innerHTML = "LET THE MADNESS BEGIN!";
-        }
+        document.getElementById("days").innerHTML = Math.floor(distance / (1000 * 60 * 60 * 24));
+        document.getElementById("hours").innerHTML = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        document.getElementById("minutes").innerHTML = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        document.getElementById("seconds").innerHTML = Math.floor((distance % (1000 * 60)) / 1000);
+        if (distance < 0) { clearInterval(x); document.getElementById("timer").innerHTML = "BRACKETS LOCKED"; }
     }, 1000);
 </script>
 
